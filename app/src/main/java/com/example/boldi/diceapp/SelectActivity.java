@@ -24,7 +24,7 @@ public class SelectActivity extends AppCompatActivity {
         btn_history = (ImageButton)findViewById(R.id.btn_history);
         btn_roll = (Button)findViewById(R.id.btn_roll);
         numbPick = (NumberPicker)findViewById(R.id.numbPick);
-        setNumbPick();
+        setNumberPicker();
 
        /* btn_history.setOnClickListener(new View.OnClickListener()
         {
@@ -34,35 +34,27 @@ public class SelectActivity extends AppCompatActivity {
             }
 
         });*/
-    }
-    public void setNumbPick()
-    {
-        numbPick.setMaxValue(6);
-        if(numbPick.getValue()==1)
-        {
 
-        }else if(numbPick.getValue()==2)
-        {
-
-        }else if(numbPick.getValue()==3)
-        {
-
-        }else if(numbPick.getValue()==4)
-        {
-
-        }else if(numbPick.getValue()==5)
-        {
-
-        }else if(numbPick.getValue()==6)
-        {
-
-        }
-    }
-    /*public void onClickNext()
+       /*public void onClickNext()
     {
         Intent intent = new Intent();
         intent.setClass(this,HistoryActivity.class);
         startActivity(intent);
 
     }*/
+    }
+    private void setNumberPicker()
+    {
+        numbPick.setValue(1);
+        numbPick.setMinValue(1);
+        numbPick.setMaxValue(6);
+    }
+
+    // -------------------------------------------------------------------------------------------
+    // new activity code
+
+
+
+
+
 }
