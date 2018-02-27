@@ -26,16 +26,23 @@ public class SelectActivity extends AppCompatActivity {
         numbPick = (NumberPicker)findViewById(R.id.numbPick);
         setNumberPicker();
 
-       /* btn_history.setOnClickListener(new View.OnClickListener()
+        btn_roll.setOnClickListener(new View.OnClickListener(){
+
+            public void onClick(View v){
+                SelectActivity.this.onClickRoll();
+            }
+        });
+
+        /*btn_history.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                SelectActivity.this.onClickNext();
+                SelectActivity.this.onClickRoll();
             }
 
-        });*/
-
-       /*public void onClickNext()
+        });
+*/
+       /*public void onClickHistory()
     {
         Intent intent = new Intent();
         intent.setClass(this,HistoryActivity.class);
@@ -50,6 +57,15 @@ public class SelectActivity extends AppCompatActivity {
         numbPick.setMaxValue(6);
     }
 
+    public void onClickRoll()
+    {
+
+        Intent intent = new Intent();
+        intent.setClass(this,RollActivity.class);
+        intent.putExtra("NumberOfDice", numbPick.getValue());
+        startActivity(intent);
+
+    }
     // -------------------------------------------------------------------------------------------
     // new activity code
 
