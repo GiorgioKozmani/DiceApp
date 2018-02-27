@@ -8,6 +8,8 @@ import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.content.Intent;
 
+import java.util.ArrayList;
+
 
 public class SelectActivity extends AppCompatActivity {
 
@@ -53,6 +55,13 @@ public class SelectActivity extends AppCompatActivity {
     // -------------------------------------------------------------------------------------------
     // new activity code
 
+    ArrayList<Dice>  oneRollDices = new
+    private void doAllTheRolling(int howManyDices)
+    {
+        for(int i = 0; i <= howManyDices; i++){
+
+        }
+    }
 
 
 
