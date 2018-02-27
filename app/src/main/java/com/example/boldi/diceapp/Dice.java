@@ -1,18 +1,22 @@
 package com.example.boldi.diceapp;
 
 import java.io.Serializable;
+import java.util.Random;
 
 /**
  * Created by MSI GS40 6QE on 27.02.2018.
  */
 
 public class Dice implements Serializable {
-    int rollValue;
+    int rollValue = 0;
     String relevantImageId;
 
-    public Dice(int rollResult)
+    public Dice()
     {
-        switch(rollResult) {
+        Random rand = new Random();
+        this.rollValue = rand.nextInt(6)+1;
+
+        switch(rollValue) {
             case 1: relevantImageId = "";
             break;
             case 2: relevantImageId = "";
@@ -29,4 +33,9 @@ public class Dice implements Serializable {
                 break;
         }
     }
+
+    public int getNumberOfRolledDots(){
+        return this.rollValue;
+    }
+
 }
