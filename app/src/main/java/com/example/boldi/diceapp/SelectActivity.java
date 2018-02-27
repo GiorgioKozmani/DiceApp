@@ -2,6 +2,7 @@ package com.example.boldi.diceapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -28,42 +29,25 @@ public class SelectActivity extends AppCompatActivity {
         numbPick = (NumberPicker)findViewById(R.id.numbPick);
         setNumberPicker();
 
-       /* btn_history.setOnClickListener(new View.OnClickListener()
+        btn_roll.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                SelectActivity.this.onClickNext();
+                Intent intent = new Intent(getApplicationContext(), RollActivity.class);
+                intent.putExtra("numberOfDices",numbPick.getValue());
+                startActivity(intent);
             }
+        });
 
-        });*/
-
-       /*public void onClickNext()
-    {
-        Intent intent = new Intent();
-        intent.setClass(this,HistoryActivity.class);
-        startActivity(intent);
-
-    }*/
     }
+
+
     private void setNumberPicker()
     {
         numbPick.setValue(1);
         numbPick.setMinValue(1);
         numbPick.setMaxValue(6);
     }
-
-    // -------------------------------------------------------------------------------------------
-    // new activity code
-
-    ArrayList<Dice>  oneRollDices = new
-    private void doAllTheRolling(int howManyDices)
-    {
-        for(int i = 0; i <= howManyDices; i++){
-
-        }
-    }
-
-
 
 
 }
