@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RollActivity"></activity>
+        <activity android:name=".HistoryActivity"></activity>
     </application>
 
 </manifest>
