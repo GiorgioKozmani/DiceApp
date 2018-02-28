@@ -23,9 +23,7 @@ public class RollActivity extends AppCompatActivity {
 
     ArrayList<Dice>  RolledDices = new ArrayList<>();
     ArrayList<Integer>  RolledDicesDrawables = new ArrayList<>();
-    int lastRolledNumberForAnimation = 0;
-
-
+    int lastUniqueAnimationDiceDrawable=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -60,19 +58,31 @@ public class RollActivity extends AppCompatActivity {
             }
         });
 
-        new CountDownTimer(numberOfDicesUserChoice*500, 500)
+        new CountDownTimer(numberOfDicesUserChoice*2000, 2000)
         {
-
+            int tickNumber = 1;
             public void onTick(long millisUntilFinished)
             {
-                 Dice rolledDice = new Dice();
-                 // change this countdown to smth iterative so i can do like string on the top ROLLING DICE NR I
-                 imageView.setImageResource(rolledDice.getRelevantDrawableImage());
-                 RolledDices.add(rolledDice);
-                 RolledDicesDrawables.add(rolledDice.getRelevantDrawableImage());
-                 //gridViewDiceDrawableArrayAdapter.notifyDataSetChanged();
+                new CountDownTimer(1000, 250)
+                {
+                    @Override
+                    public void onTick(long l) {
+                        textView.setText("Dice number "+tickNumber);
+                        imageView.setImageResource(getNotRepeatedRandomDiceNumber());
+                    }
 
-                 imageAdapter.notifyDataSetChanged();
+                    @Override
+                    public void onFinish() {
+                        Dice rolledDice = new Dice();
+                        imageView.setImageResource(rolledDice.getRelevantDrawableImage());
+                        RolledDices.add(rolledDice);
+                        RolledDicesDrawables.add(rolledDice.getRelevantDrawableImage());
+                        //gridViewDiceDrawableArrayAdapter.notifyDataSetChanged();
+                        imageAdapter.notifyDataSetChanged();
+                        tickNumber++;
+                    }
+                }.start();
+
             }
 
             public void onFinish() {
@@ -82,8 +92,6 @@ public class RollActivity extends AppCompatActivity {
         }.start();
 
 
-      //  doAllTheRolling(userNumberOfDicesChoice);
-       // testRolling();
 
 
     }
@@ -105,10 +113,12 @@ public class RollActivity extends AppCompatActivity {
 //
 //    }
 //
-//    private int getNotRepeatedRandomDiceNumber() {
-//            int rolledNumber;
-//            Random rand = new Random();
-//            rolledNumber = rand.nextInt(6)+1;
-//            return rolledNumber!=this.lastRolledNumberForAnimation ? rolledNumber : getNotRepeatedRandomDiceNumber();
-//    }
+    private int getNotRepeatedRandomDiceNumber() {
+            int diceSideToReturnInAnimation = new Dice().getRelevantDrawableImage();
+            if(diceSideToReturnInAnimation==this.lastUniqueAnimationDiceDrawable)
+            {
+                return getNotRepeatedRandomDiceNumber();
+            }
+            return diceSideToReturnInAnimation;
+    }
 }

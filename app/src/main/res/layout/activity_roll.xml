@@ -10,9 +10,10 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="210dp"
-        android:layout_height="210dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="@string/rolling"
+        app:layout_constraintBottom_toTopOf="@+id/gridView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -22,11 +23,13 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:text="@string/rolling"
         android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,38 +37,44 @@
     <GridView
         android:id="@+id/gridView"
         android:layout_width="0dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="27dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="8dp"
-        android:fadeScrollbars="false"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="31dp"
+        android:columnWidth="120dp"
+        android:fadeScrollbars="false"
         android:gravity="center"
         android:numColumns="auto_fit"
-        android:columnWidth="60dp"
+        android:rowCount="2"
+        app:layout_constraintBottom_toTopOf="@+id/btnBackToMainFromRoll"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
     <Button
         android:id="@+id/btnBackToMainFromRoll"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="16dp"
         android:text="Roll Again"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSeeHistoryFromRoll"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSeeHistoryFromRoll"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:text="View History"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnBackToMainFromRoll"
+        app:layout_constraintTop_toBottomOf="@+id/gridView" />
 
 </android.support.constraint.ConstraintLayout>
