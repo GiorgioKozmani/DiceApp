@@ -39,7 +39,9 @@ public class SelectActivity extends AppCompatActivity {
 
         btn_history.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                SelectActivity.this.onClickRoll();
+                Intent i= new Intent(getApplicationContext(), HistoryActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
             }
         });
         btn_roll.setOnClickListener(new View.OnClickListener() {

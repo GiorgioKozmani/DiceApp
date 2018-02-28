@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">DiceApp</string>
+    <string name="app_name">Dice App</string>
+    <string name="welcomeTextView">Simple Dice App</string>
     <string name="x">X</string>
-    <string name="roll">Roll!!</string>
+    <string name="roll">Roll!</string>
+    <string name="backToMain">Again?</string>
+    <string name="viewHistory">View History</string>
     <string name="rolling">Rolling...</string>
     <string name="number_of_dices">Number of dices</string>
     <string name="todo">TODO</string>
