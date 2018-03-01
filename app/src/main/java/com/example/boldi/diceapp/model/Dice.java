@@ -1,6 +1,8 @@
-package com.example.boldi.diceapp;
+package com.example.boldi.diceapp.model;
 
 import android.graphics.drawable.Drawable;
+
+import com.example.boldi.diceapp.R;
 
 import java.io.Serializable;
 import java.util.Random;
@@ -9,10 +11,9 @@ import java.util.Random;
  * Created by MSI GS40 6QE on 27.02.2018.
  */
 
-public class Dice implements Serializable {
+public class Dice {
     int rollValue = 0;
     int relevantDrawableImage;
-    int relevantDrawableImageForLists;
 
     public Dice()
     {
@@ -37,9 +38,6 @@ public class Dice implements Serializable {
         }
     }
 
-    public int getNumberOfRolledDots(){
-        return this.rollValue;
-    }
     public int getRelevantDrawableImage(){
         return this.relevantDrawableImage;
     }

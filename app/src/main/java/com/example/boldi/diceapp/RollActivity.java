@@ -1,22 +1,24 @@
 package com.example.boldi.diceapp;
 
-import android.graphics.drawable.Drawable;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.NumberPicker;
 import android.content.Intent;
 import android.widget.TextView;
 
+import com.example.boldi.diceapp.model.Dice;
+import com.example.boldi.diceapp.model.OneRollingRoundStorage;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Calendar;
 
 
 public class RollActivity extends AppCompatActivity {
@@ -88,31 +90,20 @@ public class RollActivity extends AppCompatActivity {
             public void onFinish() {
                 textView.setText("Rollings Done!");
                 imageView.setImageResource(R.drawable.maindice);
+                storeSharedPrefVal(new OneRollingRoundStorage(RolledDicesDrawables, Calendar.getInstance().getTime()));
             }
         }.start();
 
-
-
-
     }
 
+    public void storeSharedPrefVal(OneRollingRoundStorage obj){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = preferences.edit();
+        String jsonStr = new Gson().toJson(obj);
+        editor.putString("OneRoundResult",jsonStr);
+        editor.commit();
+    }
 
-
-//    private void doAllTheRolling(int howManyDices)
-//    {
-//        for(int i = 0; i < howManyDices; i++){
-//            RollDices.add(new Dice());
-//        }
-//    }
-//
-//    private void testRolling()
-//    {
-//        for(int i = 0; i < RollDices.size(); i++){
-//            Log.d("DICE_TEST", "Dice nb "+(i+1)+" rolled "+RollDices.get(i).getNumberOfRolledDots());
-//        }
-//
-//    }
-//
     private int getNotRepeatedRandomDiceNumber() {
             int diceSideToReturnInAnimation = new Dice().getRelevantDrawableImage();
             if(diceSideToReturnInAnimation==this.lastUniqueAnimationDiceDrawable)
