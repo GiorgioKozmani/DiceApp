@@ -44,7 +44,6 @@
         android:fadeScrollbars="false"
         android:gravity="center"
         android:numColumns="auto_fit"
-        android:rowCount="2"
         app:layout_constraintBottom_toTopOf="@+id/btnBackToMainFromRoll"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

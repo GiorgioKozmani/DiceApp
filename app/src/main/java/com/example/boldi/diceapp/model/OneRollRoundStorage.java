@@ -4,21 +4,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * Created by miesz on 01.03.2018.
- */
 
-public class OneRollingRoundStorage {
-    ArrayList<Integer> ResultsDrawables;
-    long rollingDateLong;
+public class OneRollRoundStorage {
+    private ArrayList<Integer> ResultsDrawables;
+    private long rollingDateLong;
 
-    public OneRollingRoundStorage(ArrayList<Integer> resultsDrawables, Date rollingDate)
+    public OneRollRoundStorage(ArrayList<Integer> resultsDrawables, Date rollingDate)
     {
      this.ResultsDrawables = resultsDrawables;
      this.rollingDateLong =  rollingDate.getTime();
     }
 
-    public OneRollingRoundStorage() {}
+    public OneRollRoundStorage() {}
 
     public void setDrawables(ArrayList<Integer> arrayList){
         this.ResultsDrawables = arrayList;

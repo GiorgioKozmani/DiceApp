@@ -1,4 +1,4 @@
-package com.example.boldi.diceapp;
+package com.example.boldi.diceapp.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;

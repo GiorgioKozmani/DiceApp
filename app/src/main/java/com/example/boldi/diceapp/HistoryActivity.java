@@ -1,32 +1,33 @@
 package com.example.boldi.diceapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
-import com.example.boldi.diceapp.model.OneRollingRoundStorage;
+import com.example.boldi.diceapp.adapters.HistoryAdapter;
+import com.example.boldi.diceapp.converters.JsonConverters;
+import com.example.boldi.diceapp.model.OneRollRoundStorage;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 
 public class HistoryActivity extends AppCompatActivity {
 
     Button btn_clear;
     ImageButton  btn_back;
+    HistoryAdapter ra;
+    ArrayList<OneRollRoundStorage> RollsObjects;
 
-    ArrayList<OneRollingRoundStorage> RollsObjects;
-    OneRollingRoundStorage test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,52 +35,56 @@ public class HistoryActivity extends AppCompatActivity {
 
         btn_clear = (Button) findViewById(R.id.btn_clear);
         btn_back = (ImageButton) findViewById(R.id.btn_back);
-
+        // fetch data from sharedprefs and assign it to internal array in order to present in in listview after
         try {
-            getSharedPrefVal();
+            getSharedPrefArray();
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        ra = new HistoryAdapter(getApplicationContext(), this.RollsObjects);
+        ListView lv = (ListView) findViewById(R.id.listView);
+        lv.setAdapter(ra);
+
+        btn_clear.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    ClearSharedPreferencesForRolls();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                    finish();
+            }
+        });
     }
 
     // ----------------------------------------------------------------------------- SharedPreferences ----------------------------------------------------------------------------------------
 
 
-    private void getSharedPrefVal () throws JSONException {
+    public void ClearSharedPreferencesForRolls() throws JSONException {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String sobj = preferences.getString("OneRoundResult", "");
-       // if(sobj.equals(""))return new OneRollingRoundStorage(new ArrayList<Integer>(), Calendar.getInstance().getTime());
-
-        JSONObject a = new JSONObject(sobj);
-        test = convertJsonToItem(a);
-        Log.d("------------------>", "start|"+test.getDateString()+"|end");
-       // return convertJsonToItem(a);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+        this.RollsObjects.clear();
+        ra.notifyDataSetChanged();
     }
 
-    // ----------------------------------------------------------------------------- custom converters -----------------------------------------------------------------------------------------
-    private OneRollingRoundStorage convertJsonToItem(JSONObject json) throws JSONException {
+    private void getSharedPrefArray() throws JSONException {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String jArr = preferences.getString("RoundResultsArray", "");
+        if(jArr.equals(""))RollsObjects =  new ArrayList<OneRollRoundStorage>();
 
-            OneRollingRoundStorage tempObj = new OneRollingRoundStorage();
-            JSONObject jOneRollingRoundStorage = json;
-            long rollingDateLong = jOneRollingRoundStorage.getLong("rollingDateLong");
-            JSONArray jDrawables = jOneRollingRoundStorage.getJSONArray("ResultsDrawables");
-            ArrayList<Integer> drawables = convertJsonIntegerArrayToIntegerArrayList(jDrawables);
-            tempObj.setDrawables(drawables);
-            tempObj.setRollingDateLong(rollingDateLong);
-            // think it throught     RollsObjects.add(tempObj);
-
-        return tempObj;
+        JSONArray a = new JSONArray(jArr);
+        RollsObjects = JsonConverters.JsonOneRollingRoundStorageArrayToOneRollingRoundStorageArrayList(a);
     }
 
-    private ArrayList<Integer> convertJsonIntegerArrayToIntegerArrayList(JSONArray jDrawables) throws JSONException {
-        ArrayList<Integer> tempList = new ArrayList<>();
-        if (jDrawables != null) {
-            int len = jDrawables.length();
-            for (int i = 0; i < len; i++) {
-                tempList.add(jDrawables.getInt(i));
-            }
-        }
-        return tempList;
-    }
+
+
+
+
 
 }
